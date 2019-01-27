@@ -73,7 +73,7 @@ class Game extends React.Component {
     componentWillUpdate(nextProps, nextState) {
         if (nextState.selectedIds !== this.state.selectedIds || nextState.remainingSeconds === 0) {
             this.gameStatus = this.calcGameStatus(nextState);
-			console.warn(this.gameStatus);
+			//console.warn(this.gameStatus);
             if (this.gameStatus !== 'PLAYING') {
                 clearInterval(this.intervalId)
             }
@@ -111,7 +111,7 @@ class Game extends React.Component {
 
         return (
             <View style={styles.container}>
-                <Text style={[styles.target, styles['STATUS_${gameStatus}']]}>
+                <Text style={[styles.target, styles[`STATUS_${gameStatus}`]]}>
                     {this.target}
                 </Text>
                 <View style={styles.randomContainer}>
@@ -131,7 +131,7 @@ class Game extends React.Component {
                 {this.gameStatus !== 'PLAYING' && (
                     <Button title="Play Again" onPress={this.props.onPlayAgain} />
                 )}
-                <Text style={styles.playAgain}>
+                <Text style={[styles.playAgain, styles[`STATUS_${gameStatus}`]]}>
                     {this.state.remainingSeconds}
                 </Text>
             </View>
@@ -155,7 +155,6 @@ const styles = StyleSheet.create({
 
     playAgain: {
         fontSize: 70,
-        backgroundColor: 'purple',
         textAlign: 'center',
         padding: '20%',
 
